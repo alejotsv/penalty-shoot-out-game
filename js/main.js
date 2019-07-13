@@ -25,8 +25,17 @@ $( document ).ready(function() {
     ballImg.src = './img/ball.png';
 
     ballImg.onload = () => {
-      ctx.drawImage(ballImg, 350, 500, 80, 80);
+      ctx.drawImage(ballImg, 340, 500, 80, 80);
     }
+
+    // Draw targets
+    let unselectedTarget = new Image();
+    unselectedTarget.src = './img/target-unselected.png';
+
+    unselectedTarget.onload = () => {
+      ctx.drawImage(unselectedTarget, 0, 0, 980, 982);
+    };
+
 
   }
   

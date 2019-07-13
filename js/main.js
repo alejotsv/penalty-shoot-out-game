@@ -8,17 +8,27 @@ $( document ).ready(function() {
     const ctx = myCanvas.getContext("2d");
     // Create canvas, set height and width
 
+    // Add goal background image
     let backgroundImg = new Image();
     backgroundImg.src = './img/background-goal.jpg';
 
     backgroundImg.onload = () => {
       ctx.drawImage(backgroundImg, 0, 0, 800, 600);
     };
+
+    if (!button.hasClass('started')){
+      button.addClass('started');
+    };
+
   }
   
   
   button.click( () => {
-    startGame();
+    if (button.hasClass('started')){
+      console.log(`don't`);
+    } else {
+      startGame();
+    }
   });
 
 

@@ -20,7 +20,16 @@ $( document ).ready(function() {
       button.addClass('started');
     };
 
+    // Draw ball
+    let ballImg = new Image();
+    ballImg.src = './img/ball.png';
+
+    ballImg.onload = () => {
+      ctx.drawImage(ballImg, 350, 500, 80, 80);
+    }
+
   }
+  
   
   
   button.click( () => {

@@ -14,28 +14,44 @@ $( document ).ready(function() {
 
     backgroundImg.onload = () => {
       ctx.drawImage(backgroundImg, 0, 0, 800, 600);
-    };
-
-    if (!button.hasClass('started')){
-      button.addClass('started');
-    };
+    };  
 
     // Draw ball
     let ballImg = new Image();
     ballImg.src = './img/ball.png';
 
     ballImg.onload = () => {
-      ctx.drawImage(ballImg, 340, 500, 80, 80);
+      ctx.drawImage(ballImg, 365, 500, 80, 80);
     }
 
     // Draw targets
     let unselectedTarget = new Image();
-    unselectedTarget.src = './img/target-unselected.png';
+    unselectedTarget.src = './img/target-unselected3.png';
 
-    unselectedTarget.onload = () => {
-      ctx.drawImage(unselectedTarget, 0, 0, 980, 982);
+    let selectedTarget = new Image();
+    selectedTarget.src = './img/target-selected2.png';
+    
+    unselectedTarget.onload = setTimeout(() => {
+      // Top targets
+      ctx.drawImage(unselectedTarget, 100, 140, 50, 50);
+      ctx.drawImage(unselectedTarget, 380, 140, 50, 50);
+      ctx.drawImage(unselectedTarget, 660, 140, 50, 50);
+
+      // Middle targets
+      ctx.drawImage(unselectedTarget, 100, 225, 50, 50);
+      ctx.drawImage(selectedTarget, 380, 225, 50, 50);
+      ctx.drawImage(unselectedTarget, 660, 225, 50, 50);
+
+      // Bottom targets
+      ctx.drawImage(unselectedTarget, 100, 310, 50, 50);
+      ctx.drawImage(unselectedTarget, 380, 310, 50, 50);
+      ctx.drawImage(unselectedTarget, 660, 310, 50, 50);
+    }, 50);
+    
+
+    if (!button.hasClass('started')){
+      button.addClass('started');
     };
-
 
   }
   

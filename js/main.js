@@ -59,7 +59,7 @@ $( document ).ready(function() {
   
   button.click( () => {
     if (button.hasClass('started')){
-      console.log(`don't`);
+      doNot();
     } else {
       startGame();
     }

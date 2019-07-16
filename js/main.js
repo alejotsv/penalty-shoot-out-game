@@ -42,7 +42,10 @@ $( document ).ready(function() {
       currentGame.background = currentBackground;
       currentBackground.drawBackground(ctx); 
       
-      
+      // create new ball, store in currentGame, and draw ball
+      let currentBall = new Ball();
+      currentGame.ball = currentBall;
+      currentBall.drawBall(ctx);
       
     });
 

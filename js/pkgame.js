@@ -27,3 +27,21 @@ class Background {
     }
   }
 }
+
+class Ball {
+  constructor() {
+    this.x = 365;
+    this.y = 500;
+    this.width = 80;
+    this.height = 80;
+    this.img = './img/ball.png';
+  }
+  drawBall(ctx) {
+    const ballImg = new Image();
+    ballImg.src = this.img;
+    ballImg.onload = () => {
+      ctx.drawImage(ballImg, this.x, this.y, this.width, this.height);
+    }
+  }
+
+}

@@ -43,5 +43,28 @@ class Ball {
       ctx.drawImage(ballImg, this.x, this.y, this.width, this.height);
     }
   }
-
 }
+
+  class Target {
+    constructor(x, y, w, h) {
+      this.x = x;
+      this.y = y;
+      this.width = w;
+      this.height = h;
+      this.imgS = './img/target-selected2.png';
+      this.imgU = './img/target-unselected3.png';
+      this.active = false;
+    }
+    drawTarget(ctx) {
+      const targetImg = new Image();
+      if (this.active === false){
+        targetImg.src = this.imgU;
+      } else {
+        targetImg.src = this.imgS;
+      }
+      targetImg.onload = setTimeout(() => {
+        ctx.drawImage(targetImg, this.x, this.y, this.width, this.height);
+      },10);
+    }
+  }
+

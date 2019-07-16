@@ -46,7 +46,46 @@ $( document ).ready(function() {
       let currentBall = new Ball();
       currentGame.ball = currentBall;
       currentBall.drawBall(ctx);
-      
+
+      // create targets 1 to 9, store them in currentGame, and draw targets
+
+      let target1 = new Target(100, 140, 50, 50);
+      currentGame.targets.push(target1);
+      target1.drawTarget(ctx);
+
+      let target2 = new Target(380, 140, 50, 50);
+      currentGame.targets.push(target2);
+      target2.drawTarget(ctx);
+
+      let target3 = new Target(660, 140, 50, 50);
+      currentGame.targets.push(target3);
+      target3.drawTarget(ctx);
+
+      let target4 = new Target(100, 225, 50, 50);
+      currentGame.targets.push(target4);
+      target4.drawTarget(ctx);
+
+      let target5 = new Target(380, 225, 50, 50);
+      currentGame.targets.push(target5);
+      target5.drawTarget(ctx);
+
+      let target6 = new Target(660, 225, 50, 50);
+      currentGame.targets.push(target6);
+      target6.drawTarget(ctx);
+
+      let target7 = new Target(100, 310, 50, 50);
+      currentGame.targets.push(target7);
+      target7.drawTarget(ctx);
+
+      let target8 = new Target(380, 310, 50, 50);
+      currentGame.targets.push(target8);
+      target8.drawTarget(ctx);
+
+      let target9 = new Target(660, 310, 50, 50);
+      currentGame.targets.push(target9);
+      target9.drawTarget(ctx);
+
+      console.log(currentGame.targets);
     });
 
 

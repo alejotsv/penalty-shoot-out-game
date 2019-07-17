@@ -85,7 +85,19 @@ $( document ).ready(function() {
       currentGame.targets.push(target9);
       target9.drawTarget(ctx);
 
-      console.log(currentGame.targets);
+      // move ball test
+      function moveThisBall(){
+        currentBackground.drawBackground(ctx);
+        currentBall.drawBall(ctx);
+        currentBall.y--;
+        if (currentBall.y === 225){
+          cancelAnimationFrame(requestAnimationFrame(moveThisBall));
+        } else {
+          requestAnimationFrame(moveThisBall);
+      
+        }
+      }
+      moveThisBall();
     });
 
 

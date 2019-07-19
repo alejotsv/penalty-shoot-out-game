@@ -40,64 +40,103 @@ $( document ).ready(function() {
       // create new background, store in currentGame, and draw background
       let currentBackground = new Background();
       currentGame.background = currentBackground;
-      currentBackground.drawBackground(ctx); 
-      
+            
       // create new ball, store in currentGame, and draw ball
       let currentBall = new Ball();
       currentGame.ball = currentBall;
-      currentBall.drawBall(ctx);
+      const ballImg = new Image();
+      ballImg.src = currentBall.img;
+      let ballX = currentBall.x;
+      let ballY = currentBall.y;
+      let ballW = currentBall.width;
+      let ballH = currentBall.height;
 
       // create targets 1 to 9, store them in currentGame, and draw targets
 
-      let target1 = new Target(100, 140, 50, 50);
-      currentGame.targets.push(target1);
-      target1.drawTarget(ctx);
-
-      let target2 = new Target(380, 140, 50, 50);
-      currentGame.targets.push(target2);
-      target2.drawTarget(ctx);
-
-      let target3 = new Target(660, 140, 50, 50);
-      currentGame.targets.push(target3);
-      target3.drawTarget(ctx);
-
-      let target4 = new Target(100, 225, 50, 50);
-      currentGame.targets.push(target4);
-      target4.drawTarget(ctx);
-
-      let target5 = new Target(380, 225, 50, 50);
-      currentGame.targets.push(target5);
-      target5.drawTarget(ctx);
-
-      let target6 = new Target(660, 225, 50, 50);
-      currentGame.targets.push(target6);
-      target6.drawTarget(ctx);
-
-      let target7 = new Target(100, 310, 50, 50);
-      currentGame.targets.push(target7);
-      target7.drawTarget(ctx);
-
-      let target8 = new Target(380, 310, 50, 50);
-      currentGame.targets.push(target8);
-      target8.drawTarget(ctx);
-
-      let target9 = new Target(660, 310, 50, 50);
-      currentGame.targets.push(target9);
-      target9.drawTarget(ctx);
-
-      // move ball test
-      function moveThisBall(){
-        currentBackground.drawBackground(ctx);
-        currentBall.drawBall(ctx);
-        currentBall.y--;
-        if (currentBall.y === 225){
-          cancelAnimationFrame(requestAnimationFrame(moveThisBall));
-        } else {
-          requestAnimationFrame(moveThisBall);
-      
+      function drawGameTargets(ctx) {
+        let x;
+        let y = 140;
+        let target;
+        for (let ti = 0; ti < 3; ti++) {
+          x = 100;
+          for (let tj = 0; tj < 3; tj++){
+            target = new Target(x, y, 50, 50);
+            currentGame.targets.push(target);
+            target.drawTarget(ctx);
+            x += 280;
+          }
+          y += 85;          
         }
       }
-      moveThisBall();
+
+     
+      
+      
+      
+      // Start game
+
+      
+      function startGame(){
+        ctx.clearRect(0, 0, 800, 600);
+        currentBackground.drawBackground(ctx);
+        drawThisBall();
+        ballY --;
+        
+        // drawGameTargets(ctx);        
+        
+        if(ballY>225){
+          requestAnimationFrame(() => startGame());           
+      } else {
+        cancelAnimationFrame(startGame);
+      }   
+        
+        
+        }
+        
+        
+
+        function drawThisBall(){
+          ctx.drawImage(ballImg, ballX, ballY, ballW, ballH);
+        }
+
+        document.onkeypress = function(e){
+          if (e.keyCode === 32){
+            startGame();
+        }
+      }
+
+      
+      
+    
+
+           
+ 
+      
+
+
+
+      
+      // move ball test
+      function moveThisBall(){
+        let theTarget = currentGame.targets[4];
+        
+        currentBackground.drawBackground(ctx);
+        currentBall.drawBall(ctx);
+        theTarget.drawTarget(ctx);
+        currentBall.y -= 5;
+        currentBall.height -= 0.6;
+        currentBall.width -= 0.6;
+        if (currentBall.y === theTarget.y){
+          cancelAnimationFrame(requestAnimationFrame(moveThisBall));
+        } else {
+          requestAnimationFrame(moveThisBall);              
+        }
+      }
+      // moveThisBall();
+
+      
+
+
     });
 
 

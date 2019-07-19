@@ -21,10 +21,8 @@ class Background {
   }
   drawBackground(ctx) {
     const backgroundImg = new Image();
-    backgroundImg.src = this.img;     
-    backgroundImg.onload = () => {   
-      ctx.drawImage(backgroundImg, this.x, this.y, this.width, this.height);
-    }
+    backgroundImg.src = this.img;
+    ctx.drawImage(backgroundImg, this.x, this.y, this.width, this.height);    
   }
 }
 
@@ -39,9 +37,7 @@ class Ball {
   drawBall(ctx) {
     const ballImg = new Image();
     ballImg.src = this.img;
-    ballImg.onload = () => {
-      ctx.drawImage(ballImg, this.x, this.y, this.width, this.height);
-    }
+    ctx.drawImage(ballImg, this.x, this.y, this.width, this.height);    
   }
 }
 
@@ -62,9 +58,7 @@ class Ball {
       } else {
         targetImg.src = this.imgS;
       }
-      targetImg.onload = setTimeout(() => {
-        ctx.drawImage(targetImg, this.x, this.y, this.width, this.height);
-      },10);
+      ctx.drawImage(targetImg, this.x, this.y, this.width, this.height);
     }
   }
 

@@ -22,3 +22,7 @@
 #score {
   width: 600px;
 }
+
+#player-score, #machine-score {
+  list-style-type: none;
+}

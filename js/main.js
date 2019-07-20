@@ -21,6 +21,10 @@ $( document ).ready(function() {
       // create new game
       let currentGame = new Game();
 
+      // target player and AI score HTML
+      let playerScore = $('#player-score');
+      let machineScore = $('#machine-score');
+
       // create variable to store user and ai scores
       let userScore = currentGame.userScore;
       let aiScore = currentGame.aiScore;
@@ -234,8 +238,10 @@ $( document ).ready(function() {
           if (goaliePosition === selectedTarget){          
             alert('Stopped!');
             gameStatusUser();
+            playerScore.append(`<li><img src="./img/red-x.png" height='30px' width='30px' alt="missed"></li>`);
           } else {
             alert('Goaaaaaaaaaaaaaaaal!');
+            playerScore.append(`<li><img src="./img/green-circle.png" height='30px' width='30px' alt="goal"></li>`);            
             userScore ++;
             gameStatusUser();            
           }          
@@ -246,8 +252,11 @@ $( document ).ready(function() {
             // determine if the AI scores
             let aiGoal = aiShoot();
             if (aiGoal === true){
-              aiScore ++;
+              machineScore.append(`<li><img src="./img/green-circle.png" height='30px' width='30px' alt="goal"></li>`);
+              aiScore ++;              
               gameStatusAI();              
+            } else {
+              machineScore.append(`<li><img src="./img/red-x.png" height='30px' width='30px' alt="missed"></li>`);
             }
           } else {
             alert('Game over');
@@ -355,3 +364,8 @@ $( document ).ready(function() {
 
 
 });
+
+
+
+// this.score = './img/green-circle.png';
+// this.miss = './img/red-x.png'

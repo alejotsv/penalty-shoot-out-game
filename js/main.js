@@ -142,13 +142,12 @@ $( document ).ready(function() {
         
         if(currentBall.y > currentTargets[selectedTarget].y){
           requestAnimationFrame(() => shoot());           
-        } else {
-          let goaliePosition = goalieTarget();
+        } else {          
           console.log(`Goalie is at ${goaliePosition} || Target is ${selectedTarget}`);
           if (goaliePosition === selectedTarget){            
             alert('Stopped!');
           } else {
-            alert('Goaaaaaaaaaaaaaaaal');
+            alert('Goaaaaaaaaaaaaaaaal!');
           }
             console.log(currentBall.y);    
             cancelAnimationFrame(shoot);

@@ -8,6 +8,11 @@ class Game {
     this.goalkeeper = {}; // goalkeeper object
     this.userScore = 0;
     this.aiScore = 0;
+    this.userChances = 5;
+    this.aiChances = 5;
+    this.win = false;
+    this.lose = false;
+
   }
 }
 

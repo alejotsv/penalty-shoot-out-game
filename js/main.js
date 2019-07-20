@@ -71,9 +71,15 @@ $( document ).ready(function() {
 
       let currentTargets = currentGame.targets;
       
+      // Set center target as selected
+      let selectedTarget = 4;
+      currentTargets[selectedTarget].active = true;
+      
+      
       
       // Start game
 
+      // Function to draw background, ball, and targets
       function drawEverything() {
         backgroundImg.onload = () => {
           ctx.drawImage(backgroundImg, currentBackground.x, currentBackground.y, currentBackground.width, currentBackground.height);
@@ -87,7 +93,7 @@ $( document ).ready(function() {
           if (target.active === false) {
             targetImg.src = target.imgU;
           } else {
-            targetImg.src = target.imgU;
+            targetImg.src = target.imgS;
           }
           setTimeout (() => {            
             ctx.drawImage(targetImg, target.x, target.y, target.width, target.height);             
@@ -96,20 +102,22 @@ $( document ).ready(function() {
         
       }
 
-      drawEverything();
+      // Draw initial state of game
+      drawEverything();      
       
-      function startGame(){
+      // Function to shoot the ball
+      function shoot(){
+        // Clear canvas, draw background and ball, and update ball Y, width, and height
         ctx.clearRect(0, 0, 800, 600);
         currentBackground.drawBackground(ctx);
         currentBall.drawBall(ctx);
-        currentBall.y --;
-        
-        // drawGameTargets(ctx);        
+        currentBall.y --;      
+              
         
         if(currentBall.y>225){
-          requestAnimationFrame(() => startGame());           
+          requestAnimationFrame(() => shoot());           
         } else {        
-          cancelAnimationFrame(startGame);
+          cancelAnimationFrame(shoot);
           ctx.clearRect(0, 0, 800, 600);
           currentBall.y = 500;
           currentBackground.drawBackground(ctx);
@@ -120,19 +128,76 @@ $( document ).ready(function() {
             },15);
           });
         }          
-      }
+       }
         
         
-
-        function drawThisBall(){
-          ctx.drawImage(ballImg, ballX, ballY, ballW, ballH);
-        }
-
-        document.onkeypress = function(e){
-          if (e.keyCode === 32){
-            startGame();
-        }
+      //  Look for selected target in the currentTargets array
+      function findSelectedTarget() {
+        for (let i = 0; i < currentTargets.length; i++){
+         if (currentTargets[i].active === true){
+           selectedTarget = i;
+         }
+        }         
+        return selectedTarget;
       }
+
+       
+      // document.onkeypress = function(e){
+      //   if (e.keyCode === 32){
+      //     shoot();
+      //   }
+      // }
+
+      document.onkeydown = function(e){
+        switch(e.keyCode){
+          // spacebar (shoot)
+          case 32:
+            shoot();
+            break;
+
+          // left
+          case 37:
+            if (selectedTarget !== 0 && selectedTarget !== 3 && selectedTarget !== 6){
+             currentTargets[selectedTarget].active = false;
+             selectedTarget--; 
+            }
+            break;
+
+          // up
+          case 38:
+            if (selectedTarget > 2){
+              currentTargets[selectedTarget].active = false;
+              selectedTarget -= 3;
+            }
+            break;
+
+          // right
+          case 39:
+             if (selectedTarget !== 2 && selectedTarget !== 5 && selectedTarget !== 8){
+              currentTargets[selectedTarget].active = false;
+              selectedTarget++; 
+             }
+             break;
+
+          // down
+          case 40:
+            if (selectedTarget < 6){
+              currentTargets[selectedTarget].active = false;
+              selectedTarget += 3;              
+            }
+            break;
+          }
+          currentTargets[selectedTarget].active = true;
+          ctx.clearRect(0, 0, 800, 600);
+          currentBall.y = 500;
+          currentBackground.drawBackground(ctx);
+          currentBall.drawBall(ctx);
+          currentTargets.forEach((target) => {            
+            setTimeout (() => {            
+              target.drawTarget(ctx);
+            },20);
+          });
+        }
 
       
       

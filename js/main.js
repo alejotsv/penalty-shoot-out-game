@@ -92,7 +92,24 @@ $( document ).ready(function() {
       }
 
       // draw initial state of game
-      drawEverything();     
+      drawEverything();
+
+      // function to continue playing while game is not over
+      function continuePlaying() {
+        ctx.clearRect(0, 0, 800, 600);
+        currentBall.x = 365;
+        currentBall.y = 500;
+        currentBackground.drawBackground(ctx);
+        currentBall.drawBall(ctx);
+        currentTargets[selectedTarget].active = false;
+        selectedTarget = 4;
+        currentTargets[selectedTarget].active = true;
+        currentTargets.forEach((target) => {            
+          setTimeout (() => {            
+            target.drawTarget(ctx);
+          },15);
+        });
+      }
       
        // function to send goalie to a random target
       function goalieTarget() {
@@ -163,9 +180,10 @@ $( document ).ready(function() {
 
           // use up one chance to shoot
           userChances--;
+          console.log(userChances);
           
 
-          // determine if the AI
+          // determine if the AI scores
           let aiGoal = aiShoot();
           if (aiGoal === true){
             aiScore ++;
@@ -179,19 +197,27 @@ $( document ).ready(function() {
             console.log(`Player 1: ${userScore} || Mean Machine: ${aiScore}`);
           }                
             cancelAnimationFrame(shoot);
-            ctx.clearRect(0, 0, 800, 600);
-            currentBall.x = 365;
-            currentBall.y = 500;
-            currentBackground.drawBackground(ctx);
-            currentBall.drawBall(ctx);
-            currentTargets[selectedTarget].active = false;
-            selectedTarget = 4;
-            currentTargets[selectedTarget].active = true;
-            currentTargets.forEach((target) => {            
-              setTimeout (() => {            
-                target.drawTarget(ctx);
-              },15);
-            });
+
+            // check if game is over and who won
+            if (userChances > 0){
+                // code during the first 4 shootouts
+                if (userScore > aiScore && userScore - aiScore > userChances){
+                  alert('You won!!!!!');
+                } else if (aiScore > userScore && aiScore - userScore > userChances){
+                  alert('The Mean Machine does it again!');
+                } else {
+                  continuePlaying()
+                }
+            } else if (userScore > aiScore) {
+                alert('You won!!!!!');
+              } else if (aiScore > userScore){
+                alert('The Mean Machine does it again!');
+              } else {
+                userChances++;
+                continuePlaying()
+              }
+
+            
           } 
             
                  

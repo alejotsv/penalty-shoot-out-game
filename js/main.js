@@ -27,6 +27,10 @@ $( document ).ready(function() {
 
       // create variable to store shoot-out chances left (starting with 5)
       let userChances = currentGame.userChances;
+      let aiChances = currentGame.aiChances;
+
+      // create variable to store if game is over
+      let gameOver = false;
 
       // create new background and store in currentGame
       let currentBackground = new Background();
@@ -94,6 +98,51 @@ $( document ).ready(function() {
       // draw initial state of game
       drawEverything();
 
+      // function to check if game is over and who won after user shoots
+      function gameStatusUser() {
+        // check status after last user shot
+        if (userChances === 0){
+          if (userScore > aiScore && userScore - aiScore > aiChances){
+            alert('You won!!!!!');
+            gameOver = true;
+          } else if (aiScore > userScore){
+             alert('The Mean Machine does it again!');
+             gameOver = true;
+           } 
+        }
+
+        // check status after any other shot
+        if (userChances > 0){
+          // code during the first 4 shootouts
+          if (userScore > aiScore && userScore - aiScore > aiChances){
+            alert('You won!!!!!');
+            gameOver = true;
+          } else if (aiScore > userScore && aiScore - userScore > userChances){
+            alert('The Mean Machine does it again!');
+            gameOver = true;
+          }
+        return gameOver;
+        }
+      }
+
+      // function to check if game is over and who won after AI shoots
+      function gameStatusAI() {
+        // check status after last AI shot
+        if (aiChances === 0){
+          if (userScore > aiScore){
+            alert('You won!!!!!');
+            gameOver = true;
+          } else if (aiScore > userScore){
+             alert('The Mean Machine does it again!');
+             gameOver = true;
+           } else {
+             userChances++;
+             aiChances++;
+             gameOver = false;
+           }
+        }
+      }
+
       // function to continue playing while game is not over
       function continuePlaying() {
         ctx.clearRect(0, 0, 800, 600);
@@ -119,6 +168,7 @@ $( document ).ready(function() {
 
       // function to generate AI goal or miss
       function aiShoot(){
+        aiChances--;
         let scores = false;
         let goal = Math.floor(Math.random() * 9);
         if (goal < 7) {
@@ -180,47 +230,37 @@ $( document ).ready(function() {
 
           // use up one chance to shoot
           userChances--;
-          console.log(userChances);
-          
 
-          // determine if the AI scores
-          let aiGoal = aiShoot();
-          if (aiGoal === true){
-            aiScore ++;
-          }
           if (goaliePosition === selectedTarget){          
             alert('Stopped!');
-            console.log(`Player 1: ${userScore} || Mean Machine: ${aiScore}`);
+            gameStatusUser();
           } else {
             alert('Goaaaaaaaaaaaaaaaal!');
             userScore ++;
-            console.log(`Player 1: ${userScore} || Mean Machine: ${aiScore}`);
+            gameStatusUser();            
+          }          
+
+          cancelAnimationFrame(shoot);
+
+          if (gameOver === false) {
+            // determine if the AI scores
+            let aiGoal = aiShoot();
+            if (aiGoal === true){
+              aiScore ++;
+              gameStatusAI();              
+            }
+          } else {
+            alert('Game over');
+          }                   
+                    
+          if (gameOver === false) {
+            continuePlaying();
+          } else {
+            alert('Game over');
+          }
+
+
           }                
-            cancelAnimationFrame(shoot);
-
-            // check if game is over and who won
-            if (userChances > 0){
-                // code during the first 4 shootouts
-                if (userScore > aiScore && userScore - aiScore > userChances){
-                  alert('You won!!!!!');
-                } else if (aiScore > userScore && aiScore - userScore > userChances){
-                  alert('The Mean Machine does it again!');
-                } else {
-                  continuePlaying()
-                }
-            } else if (userScore > aiScore) {
-                alert('You won!!!!!');
-              } else if (aiScore > userScore){
-                alert('The Mean Machine does it again!');
-              } else {
-                userChances++;
-                continuePlaying()
-              }
-
-            
-          } 
-            
-                 
        }
 
         

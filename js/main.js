@@ -67,6 +67,9 @@ $( document ).ready(function() {
         }
       }   
       
+      createTargets();
+
+      let currentTargets = currentGame.targets;
       
       
       // Start game
@@ -79,8 +82,16 @@ $( document ).ready(function() {
           ctx.drawImage(ballImg, currentBall.x, currentBall.y, currentBall.width, currentBall.height);
         }
 
-        currentGame.targets.forEach((target) => {
-          console.log()
+        currentTargets.forEach((target) => {
+          let targetImg = new Image();
+          if (target.active === false) {
+            targetImg.src = target.imgU;
+          } else {
+            targetImg.src = target.imgU;
+          }
+          setTimeout (() => {            
+            ctx.drawImage(targetImg, target.x, target.y, target.width, target.height);             
+          },15);
         });
         
       }
@@ -102,7 +113,12 @@ $( document ).ready(function() {
           ctx.clearRect(0, 0, 800, 600);
           currentBall.y = 500;
           currentBackground.drawBackground(ctx);
-          currentBall.drawBall(ctx);                   
+          currentBall.drawBall(ctx);
+          currentTargets.forEach((target) => {            
+            setTimeout (() => {            
+              target.drawTarget(ctx);
+            },15);
+          });
         }          
       }
         

@@ -37,23 +37,22 @@ $( document ).ready(function() {
       // create new game
       currentGame = new Game();
 
-      // create new background, store in currentGame, and draw background
+      // create new background and store in currentGame
       let currentBackground = new Background();
       currentGame.background = currentBackground;
+      const backgroundImg = new Image();
+      backgroundImg.src = currentBackground.img;
             
       // create new ball, store in currentGame, and draw ball
       let currentBall = new Ball();
       currentGame.ball = currentBall;
       const ballImg = new Image();
       ballImg.src = currentBall.img;
-      let ballX = currentBall.x;
-      let ballY = currentBall.y;
-      let ballW = currentBall.width;
-      let ballH = currentBall.height;
+      
 
       // create targets 1 to 9, store them in currentGame, and draw targets
 
-      function drawGameTargets(ctx) {
+      function createTargets() {
         let x;
         let y = 140;
         let target;
@@ -61,37 +60,51 @@ $( document ).ready(function() {
           x = 100;
           for (let tj = 0; tj < 3; tj++){
             target = new Target(x, y, 50, 50);
-            currentGame.targets.push(target);
-            target.drawTarget(ctx);
+            currentGame.targets.push(target);            
             x += 280;
           }
           y += 85;          
         }
-      }
-
-     
+      }   
       
       
       
       // Start game
 
+      function drawEverything() {
+        backgroundImg.onload = () => {
+          ctx.drawImage(backgroundImg, currentBackground.x, currentBackground.y, currentBackground.width, currentBackground.height);
+        }
+        ballImg.onload = () => {
+          ctx.drawImage(ballImg, currentBall.x, currentBall.y, currentBall.width, currentBall.height);
+        }
+
+        currentGame.targets.forEach((target) => {
+          console.log()
+        });
+        
+      }
+
+      drawEverything();
       
       function startGame(){
         ctx.clearRect(0, 0, 800, 600);
         currentBackground.drawBackground(ctx);
-        drawThisBall();
-        ballY --;
+        currentBall.drawBall(ctx);
+        currentBall.y --;
         
         // drawGameTargets(ctx);        
         
-        if(ballY>225){
+        if(currentBall.y>225){
           requestAnimationFrame(() => startGame());           
-      } else {
-        cancelAnimationFrame(startGame);
-      }   
-        
-        
-        }
+        } else {        
+          cancelAnimationFrame(startGame);
+          ctx.clearRect(0, 0, 800, 600);
+          currentBall.y = 500;
+          currentBackground.drawBackground(ctx);
+          currentBall.drawBall(ctx);                   
+        }          
+      }
         
         
 

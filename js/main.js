@@ -21,6 +21,13 @@ $( document ).ready(function() {
       // create new game
       let currentGame = new Game();
 
+      // create variable to store user and ai scores
+      let userScore = currentGame.userScore;
+      let aiScore = currentGame.aiScore;
+
+      // create variable to store shoot-out chances left (starting with 5)
+      let userChances = currentGame.userChances;
+
       // create new background and store in currentGame
       let currentBackground = new Background();
       currentGame.background = currentBackground;
@@ -59,8 +66,6 @@ $( document ).ready(function() {
       let selectedTarget = 4;
       currentTargets[selectedTarget].active = true;
       
-      
-      
       // Start game
 
       // Function to draw background, ball, and targets
@@ -86,16 +91,27 @@ $( document ).ready(function() {
         
       }
 
-      // Draw initial state of game
+      // draw initial state of game
       drawEverything();     
       
-       // Function to send goalie to a random target
-       function goalieTarget() {
-         let goaliePosition = Math.floor(Math.random() * 9);
-         return goaliePosition;
+       // function to send goalie to a random target
+      function goalieTarget() {
+        let goaliePosition = Math.floor(Math.random() * 9);
+        return goaliePosition;
         }
+
+      // function to generate AI goal or miss
+      function aiShoot(){
+        let scores = false;
+        let goal = Math.floor(Math.random() * 9);
+        if (goal < 7) {
+          scores = true;
+        }
+        return scores;
+      }  
       
-      // Function to shoot the ball
+
+      // function to shoot the ball
       function shoot(){
 
         // Clear canvas, draw background and ball, and update ball Y, width, and height
@@ -137,19 +153,31 @@ $( document ).ready(function() {
             currentBall.x += 14;
             currentBall.y -= 10;
             break;
-        }
+        }        
         
         
         if(currentBall.y > currentTargets[selectedTarget].y){
           requestAnimationFrame(() => shoot());           
         } else {          
-          console.log(`Goalie is at ${goaliePosition} || Target is ${selectedTarget}`);
-          if (goaliePosition === selectedTarget){            
+          let goaliePosition = goalieTarget();
+
+          // use up one chance to shoot
+          userChances--;
+          
+
+          // determine if the AI
+          let aiGoal = aiShoot();
+          if (aiGoal === true){
+            aiScore ++;
+          }
+          if (goaliePosition === selectedTarget){          
             alert('Stopped!');
+            console.log(`Player 1: ${userScore} || Mean Machine: ${aiScore}`);
           } else {
             alert('Goaaaaaaaaaaaaaaaal!');
-          }
-            console.log(currentBall.y);    
+            userScore ++;
+            console.log(`Player 1: ${userScore} || Mean Machine: ${aiScore}`);
+          }                
             cancelAnimationFrame(shoot);
             ctx.clearRect(0, 0, 800, 600);
             currentBall.x = 365;

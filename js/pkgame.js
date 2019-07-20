@@ -12,7 +12,6 @@ class Game {
     this.aiChances = 5;
     this.win = false;
     this.lose = false;
-
   }
 }
 

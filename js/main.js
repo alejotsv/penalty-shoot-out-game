@@ -107,21 +107,61 @@ $( document ).ready(function() {
       
       // Function to shoot the ball
       function shoot(){
+
         // Clear canvas, draw background and ball, and update ball Y, width, and height
         ctx.clearRect(0, 0, 800, 600);
         currentBackground.drawBackground(ctx);
         currentBall.drawBall(ctx);
-        currentBall.y --;      
-              
+
+        switch (selectedTarget){
+          case 0:
+            currentBall.x -= 8;
+            currentBall.y -= 10;
+            break;
+          case 1:
+            currentBall.y -= 10;
+            break;
+          case 2:
+            currentBall.x += 8;
+            currentBall.y -= 10;
+            break;
+          case 3:
+            currentBall.x -= 9;
+            currentBall.y -= 9;
+            break;
+          case 4:
+            currentBall.y -= 9;
+            break;
+          case 5:
+            currentBall.x += 9;
+            currentBall.y -= 9;
+            break;
+          case 6:
+            currentBall.x -= 10;
+            currentBall.y -= 8;
+            break;
+          case 7:
+            currentBall.y -= 8;
+            break;
+          case 8:
+            currentBall.x += 11;
+            currentBall.y -= 8;
+            break;
+        }
         
-        if(currentBall.y>225){
+        
+        if(currentBall.y > currentTargets[selectedTarget].y){
           requestAnimationFrame(() => shoot());           
         } else {        
           cancelAnimationFrame(shoot);
           ctx.clearRect(0, 0, 800, 600);
+          currentBall.x = 365;
           currentBall.y = 500;
           currentBackground.drawBackground(ctx);
           currentBall.drawBall(ctx);
+          currentTargets[selectedTarget].active = false;
+          selectedTarget = 4;
+          currentTargets[selectedTarget].active = true;
           currentTargets.forEach((target) => {            
             setTimeout (() => {            
               target.drawTarget(ctx);
@@ -140,14 +180,7 @@ $( document ).ready(function() {
         }         
         return selectedTarget;
       }
-
-       
-      // document.onkeypress = function(e){
-      //   if (e.keyCode === 32){
-      //     shoot();
-      //   }
-      // }
-
+      
       document.onkeydown = function(e){
         switch(e.keyCode){
           // spacebar (shoot)
@@ -159,7 +192,7 @@ $( document ).ready(function() {
           case 37:
             if (selectedTarget !== 0 && selectedTarget !== 3 && selectedTarget !== 6){
              currentTargets[selectedTarget].active = false;
-             selectedTarget--; 
+             selectedTarget--;
             }
             break;
 

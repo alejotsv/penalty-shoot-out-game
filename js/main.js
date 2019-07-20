@@ -142,16 +142,14 @@ $( document ).ready(function() {
         
         if(currentBall.y > currentTargets[selectedTarget].y){
           requestAnimationFrame(() => shoot());           
-        } else if (currentBall.y === currentTargets[selectedTarget].y) {
+        } else {
           let goaliePosition = goalieTarget();
           console.log(`Goalie is at ${goaliePosition} || Target is ${selectedTarget}`);
           if (goaliePosition === selectedTarget){            
-            console.log('Stopped!');
+            alert('Stopped!');
           } else {
-            console.log('Goaaaaaaaaaaaaaaaal');
+            alert('Goaaaaaaaaaaaaaaaal');
           }
-
-        } else {
             console.log(currentBall.y);    
             cancelAnimationFrame(shoot);
             ctx.clearRect(0, 0, 800, 600);
@@ -167,7 +165,9 @@ $( document ).ready(function() {
                 target.drawTarget(ctx);
               },15);
             });
-          }          
+          } 
+            
+                 
        }
 
         

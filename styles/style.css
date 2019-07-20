@@ -25,4 +25,10 @@
 
 #player-score, #machine-score {
   list-style-type: none;
+  height: 60px;
+}
+
+#score li {
+  display: inline;
+  padding: 10px;
 }

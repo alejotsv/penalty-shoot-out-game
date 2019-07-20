@@ -21,6 +21,10 @@ $( document ).ready(function() {
       // create new game
       let currentGame = new Game();
 
+      // create win and lose variables
+      let win = currentGame.win;
+      let lose = currentGame.lose;
+
       // target player and AI score HTML
       let playerScore = $('#player-score');
       let machineScore = $('#machine-score');
@@ -107,10 +111,10 @@ $( document ).ready(function() {
         // check status after last user shot
         if (userChances === 0){
           if (userScore > aiScore && userScore - aiScore > aiChances){
-            alert('You won!!!!!');
+            win = true;
             gameOver = true;
           } else if (aiScore > userScore){
-             alert('The Mean Machine does it again!');
+             lose = true;
              gameOver = true;
            } 
         }
@@ -119,14 +123,14 @@ $( document ).ready(function() {
         if (userChances > 0){
           // code during the first 4 shootouts
           if (userScore > aiScore && userScore - aiScore > aiChances){
-            alert('You won!!!!!');
+            win = true;
             gameOver = true;
           } else if (aiScore > userScore && aiScore - userScore > userChances){
-            alert('The Mean Machine does it again!');
+            lose = true;
             gameOver = true;
-          }
-        return gameOver;
+          }        
         }
+        return gameOver;
       }
 
       // function to check if game is over and who won after AI shoots
@@ -134,17 +138,36 @@ $( document ).ready(function() {
         // check status after last AI shot
         if (aiChances === 0){
           if (userScore > aiScore){
-            alert('You won!!!!!');
+            win = true;
             gameOver = true;
           } else if (aiScore > userScore){
-             alert('The Mean Machine does it again!');
+             lose = true;
              gameOver = true;
            } else {
              userChances++;
              aiChances++;
+             setTimeout (() => {            
+              ;playerScore.html(``);
+             },1500);
+             setTimeout (() => {            
+              ;machineScore.html(``);
+             },1500);
              gameOver = false;
            }
         }
+
+        // check status after any other shot
+        if (aiChances > 0){
+          // code during the first 4 shootouts
+          if (userScore > aiScore && userScore - aiScore > aiChances){
+            win = true;
+            gameOver = true;
+          } else if (aiScore > userScore && aiScore - userScore > userChances){
+            lose = true;
+            gameOver = true;
+          }
+        }
+        return gameOver;
       }
 
       // function to continue playing while game is not over
@@ -257,15 +280,24 @@ $( document ).ready(function() {
               gameStatusAI();              
             } else {
               machineScore.append(`<li><img src="./img/red-x.png" height='30px' width='30px' alt="missed"></li>`);
+              gameStatusAI();
             }
           } else {
-            alert('Game over');
+            if (win === true) {
+              alert('Congratulations! You won!');
+            } else {
+              alert('The Mean Machine does it again! You lose!');
+            }
           }                   
                     
           if (gameOver === false) {
             continuePlaying();
           } else {
-            alert('Game over');
+            if (win === true) {
+              alert('Congratulations! You won!');
+            } else {
+              alert('The Mean Machine does it again! You lose!');
+            }
           }
 
 

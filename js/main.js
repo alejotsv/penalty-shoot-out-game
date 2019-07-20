@@ -87,7 +87,13 @@ $( document ).ready(function() {
       }
 
       // Draw initial state of game
-      drawEverything();      
+      drawEverything();     
+      
+       // Function to send goalie to a random target
+       function goalieTarget() {
+         let goaliePosition = Math.floor(Math.random() * 9);
+         return goaliePosition;
+        }
       
       // Function to shoot the ball
       function shoot(){
@@ -110,49 +116,60 @@ $( document ).ready(function() {
             currentBall.y -= 10;
             break;
           case 3:
-            currentBall.x -= 9;
-            currentBall.y -= 9;
+            currentBall.x -= 11;
+            currentBall.y -= 11;
             break;
           case 4:
-            currentBall.y -= 9;
+            currentBall.y -= 11;
             break;
           case 5:
-            currentBall.x += 9;
-            currentBall.y -= 9;
+            currentBall.x += 11;
+            currentBall.y -= 11;
             break;
           case 6:
-            currentBall.x -= 10;
-            currentBall.y -= 8;
+            currentBall.x -= 14;
+            currentBall.y -= 10;
             break;
           case 7:
-            currentBall.y -= 8;
+            currentBall.y -= 10;
             break;
           case 8:
-            currentBall.x += 11;
-            currentBall.y -= 8;
+            currentBall.x += 14;
+            currentBall.y -= 10;
             break;
         }
         
         
         if(currentBall.y > currentTargets[selectedTarget].y){
           requestAnimationFrame(() => shoot());           
-        } else {        
-          cancelAnimationFrame(shoot);
-          ctx.clearRect(0, 0, 800, 600);
-          currentBall.x = 365;
-          currentBall.y = 500;
-          currentBackground.drawBackground(ctx);
-          currentBall.drawBall(ctx);
-          currentTargets[selectedTarget].active = false;
-          selectedTarget = 4;
-          currentTargets[selectedTarget].active = true;
-          currentTargets.forEach((target) => {            
-            setTimeout (() => {            
-              target.drawTarget(ctx);
-            },15);
-          });
-        }          
+        } else if (currentBall.y === currentTargets[selectedTarget].y) {
+          let goaliePosition = goalieTarget();
+          console.log(`Goalie is at ${goaliePosition} || Target is ${selectedTarget}`);
+          if (goaliePosition === selectedTarget){            
+            console.log('Stopped!');
+          } else {
+            console.log('Goaaaaaaaaaaaaaaaal');
+          }
+
+        } else {
+            console.log(currentBall.y);    
+            cancelAnimationFrame(shoot);
+            ctx.clearRect(0, 0, 800, 600);
+            currentBall.x = 365;
+            currentBall.y = 500;
+            currentBackground.drawBackground(ctx);
+            currentBall.drawBall(ctx);
+            currentTargets[selectedTarget].active = false;
+            selectedTarget = 4;
+            currentTargets[selectedTarget].active = true;
+            currentTargets.forEach((target) => {            
+              setTimeout (() => {            
+                target.drawTarget(ctx);
+              },15);
+            });
+          }          
        }
+
         
         
       //  Look for selected target in the currentTargets array

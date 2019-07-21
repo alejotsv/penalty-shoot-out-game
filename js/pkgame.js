@@ -5,7 +5,7 @@ class Game {
     this.background = {}; // background object
     this.ball = {}; // ball object
     this.targets = []; // array of targets
-    this.goalkeeper = {}; // goalkeeper object
+    this.goalie = {}; // goalie object
     this.userScore = 0;
     this.aiScore = 0;
     this.userChances = 5;
@@ -65,4 +65,20 @@ class Ball {
       ctx.drawImage(targetImg, this.x, this.y, this.width, this.height);
     }
   }
+
+  class Goalie {
+    constructor() {
+      this.x = 380;
+      this.y = 400;
+      this.width = 180;
+      this.height = 180;
+      this.img = './img/gk-idle.png';
+    }
+    drawGoalie(ctx) {
+      const goalieImg = new Image();
+      goalieImg.src = this.img;
+      ctx.drawImage(goalieImg, this.x, this.y, this.width, this.height);    
+    }
+  }
+
 

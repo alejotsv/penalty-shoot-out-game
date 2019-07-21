@@ -175,6 +175,8 @@ $( document ).ready(function() {
         ctx.clearRect(0, 0, 800, 600);
         currentBall.x = 365;
         currentBall.y = 500;
+        currentBall.width = 80;
+        currentBall.height = 80;
         currentBackground.drawBackground(ctx);
         currentBall.drawBall(ctx);
         currentTargets[selectedTarget].active = false;
@@ -205,104 +207,234 @@ $( document ).ready(function() {
       }  
       
 
-      // function to shoot the ball
-      function shoot(){
+      // function to shoot the ball when the goalie stops the ball
+      function shootStopped(){
+        if (gameOver === false){
+          // Clear canvas, draw background and ball, and update ball Y, width, and height
+          ctx.clearRect(0, 0, 800, 600);
+          currentBackground.drawBackground(ctx);
+          currentBall.drawBall(ctx);
 
-        // Clear canvas, draw background and ball, and update ball Y, width, and height
-        ctx.clearRect(0, 0, 800, 600);
-        currentBackground.drawBackground(ctx);
-        currentBall.drawBall(ctx);
+          switch (selectedTarget){
+            case 0:
+              currentBall.x -= 8;
+              currentBall.y -= 10;
+              currentBall.width -= 0.8;
+              currentBall.height -= 0.8;
+              break;
+            case 1:
+              currentBall.y -= 10;
+              currentBall.width -= 0.8;
+              currentBall.height -= 0.8;
+              break;
+            case 2:
+              currentBall.x += 8;
+              currentBall.y -= 10;
+              currentBall.width -= 0.8;
+              currentBall.height -= 0.8;
+              break;
+            case 3:
+              currentBall.x -= 11;
+              currentBall.y -= 11;
+              currentBall.width -= 0.9;
+              currentBall.height -= 0.9;
+              break;
+            case 4:
+              currentBall.y -= 11;
+              currentBall.width -= 0.9;
+              currentBall.height -= 0.9;
+              break;
+            case 5:
+              currentBall.x += 11;
+              currentBall.y -= 11;
+              currentBall.width -= 0.9;
+              currentBall.height -= 0.9;
+              break;
+            case 6:
+              currentBall.x -= 14;
+              currentBall.y -= 10;
+              currentBall.width -= 1;
+              currentBall.height -= 1;
+              break;
+            case 7:
+              currentBall.y -= 10;
+              currentBall.width -= 1;
+              currentBall.height -= 1;
+              break;
+            case 8:
+              currentBall.x += 14;
+              currentBall.y -= 10;
+              currentBall.width -= 1;
+              currentBall.height -= 1;
+              break;
+          }        
+          
+          
+          if(currentBall.y > currentTargets[selectedTarget].y){
+            requestAnimationFrame(() => shootStopped());           
+          } else {           
 
-        switch (selectedTarget){
-          case 0:
-            currentBall.x -= 8;
-            currentBall.y -= 10;
-            break;
-          case 1:
-            currentBall.y -= 10;
-            break;
-          case 2:
-            currentBall.x += 8;
-            currentBall.y -= 10;
-            break;
-          case 3:
-            currentBall.x -= 11;
-            currentBall.y -= 11;
-            break;
-          case 4:
-            currentBall.y -= 11;
-            break;
-          case 5:
-            currentBall.x += 11;
-            currentBall.y -= 11;
-            break;
-          case 6:
-            currentBall.x -= 14;
-            currentBall.y -= 10;
-            break;
-          case 7:
-            currentBall.y -= 10;
-            break;
-          case 8:
-            currentBall.x += 14;
-            currentBall.y -= 10;
-            break;
-        }        
-        
-        
-        if(currentBall.y > currentTargets[selectedTarget].y){
-          requestAnimationFrame(() => shoot());           
-        } else {          
-          let goaliePosition = goalieTarget();
+            // use up one chance to shoot
+            userChances--;
 
-          // use up one chance to shoot
-          userChances--;
-
-          if (goaliePosition === selectedTarget){          
+            // Notify that shoot was stopped and add red X to score
             alert('Stopped!');
-            gameStatusUser();
             playerScore.append(`<li><img src="./img/red-x.png" height='30px' width='30px' alt="missed"></li>`);
-          } else {
+
+            cancelAnimationFrame(shootStopped);
+
+            // check if game is over after Player shoots
+            gameStatusUser();
+            if (gameOver === true) {
+              // Check winner
+              if (win === true) {
+                alert('Congratulations! You won!');
+              } else {
+                alert('The Mean Machine does it again! You lose!');
+              }
+            } else {
+              // determine if the AI scores
+              let aiGoal = aiShoot();
+              if (aiGoal === true){
+                machineScore.append(`<li><img src="./img/green-circle.png" height='30px' width='30px' alt="goal"></li>`);
+                aiScore ++;              
+              } else {
+                machineScore.append(`<li><img src="./img/red-x.png" height='30px' width='30px' alt="missed"></li>`);
+              }
+            }
+
+            // check if game is over after AI shoots      
+            gameStatusAI();
+            if (gameOver === false) {
+              continuePlaying();
+            } else {
+              if (win === true) {
+                alert('Congratulations! You won!');
+              } else {
+                alert('The Mean Machine does it again! You lose!');
+              }
+            }
+          }                
+        }
+       }
+      //  end function to shoot ball when the goalie stops the ball
+
+
+
+      // function to shoot the ball when it is a goal
+      function shootGoal(){
+        if (gameOver === false){
+          // Clear canvas, draw background and ball, and update ball Y, width, and height
+          ctx.clearRect(0, 0, 800, 600);
+          currentBackground.drawBackground(ctx);
+          currentBall.drawBall(ctx);
+
+          switch (selectedTarget){
+            case 0:
+              currentBall.x -= 8;
+              currentBall.y -= 10;
+              currentBall.width -= 1.2;
+              currentBall.height -= 1.2;
+              break;
+            case 1:
+              currentBall.y -= 10;
+              currentBall.width -= 1.2;
+              currentBall.height -= 1.2;
+              break;
+            case 2:
+              currentBall.x += 8;
+              currentBall.y -= 10;
+              currentBall.width -= 1.2;
+              currentBall.height -= 1.2;
+              break;
+            case 3:
+              currentBall.x -= 11;
+              currentBall.y -= 11;
+              currentBall.width -= 1.5;
+              currentBall.height -= 1.5;
+              break;
+            case 4:
+              currentBall.y -= 11;
+              currentBall.width -= 1.5;
+              currentBall.height -= 1.5;
+              break;
+            case 5:
+              currentBall.x += 11;
+              currentBall.y -= 11;
+              currentBall.width -= 1.5;
+              currentBall.height -= 1.5;
+              break;
+            case 6:
+              currentBall.x -= 14;
+              currentBall.y -= 10;
+              currentBall.width -= 1.6;
+              currentBall.height -= 1.6;
+              break;
+            case 7:
+              currentBall.y -= 10;
+              currentBall.width -= 1.6;
+              currentBall.height -= 1.6;
+              break;
+            case 8:
+              currentBall.x += 14;
+              currentBall.y -= 10;
+              currentBall.width -= 1.6;
+              currentBall.height -= 1.6;
+              break;
+          }        
+          
+          
+          if(currentBall.y > currentTargets[selectedTarget].y-20){
+            requestAnimationFrame(() => shootGoal());                   
+          } else {                    
+
+            // use up one chance to shoot
+            userChances--;
+
+            
             alert('Goaaaaaaaaaaaaaaaal!');
             playerScore.append(`<li><img src="./img/green-circle.png" height='30px' width='30px' alt="goal"></li>`);            
-            userScore ++;
-            gameStatusUser();            
-          }          
+            userScore ++;                    
 
-          cancelAnimationFrame(shoot);
+            cancelAnimationFrame(shootGoal);
 
-          if (gameOver === false) {
-            // determine if the AI scores
-            let aiGoal = aiShoot();
-            if (aiGoal === true){
-              machineScore.append(`<li><img src="./img/green-circle.png" height='30px' width='30px' alt="goal"></li>`);
-              aiScore ++;              
-              gameStatusAI();              
+            // check if game is over after Player shoots
+            gameStatusUser();
+            if (gameOver === true) {
+              // Check winner
+              if (win === true) {
+                alert('Congratulations! You won!');
+              } else {
+                alert('The Mean Machine does it again! You lose!');
+              }
             } else {
-              machineScore.append(`<li><img src="./img/red-x.png" height='30px' width='30px' alt="missed"></li>`);
-              gameStatusAI();
+              // determine if the AI scores
+              let aiGoal = aiShoot();
+              if (aiGoal === true){
+                machineScore.append(`<li><img src="./img/green-circle.png" height='30px' width='30px' alt="goal"></li>`);
+                aiScore ++;              
+              } else {
+                machineScore.append(`<li><img src="./img/red-x.png" height='30px' width='30px' alt="missed"></li>`);
+              }
             }
-          } else {
-            if (win === true) {
-              alert('Congratulations! You won!');
-            } else {
-              alert('The Mean Machine does it again! You lose!');
-            }
-          }                   
-                    
-          if (gameOver === false) {
-            continuePlaying();
-          } else {
-            if (win === true) {
-              alert('Congratulations! You won!');
-            } else {
-              alert('The Mean Machine does it again! You lose!');
-            }
-          }
 
-
+            // check if game is over after AI shoots      
+            gameStatusAI();
+            if (gameOver === false) {
+              continuePlaying();
+            } else {
+              if (win === true) {
+                alert('Congratulations! You won!');
+              } else {
+                alert('The Mean Machine does it again! You lose!');
+              }
+            }
           }                
+        }
        }
+
+      //  end function to shoot ball when it is a goal
+
 
         
         
@@ -318,9 +450,15 @@ $( document ).ready(function() {
       
       document.onkeydown = function(e){
         switch(e.keyCode){
-          // spacebar (shoot)
+          // spacebar (shoot stopped or shoot goal)
           case 32:
-            shoot();
+
+            let goaliePosition = goalieTarget();
+            if (goaliePosition === selectedTarget){          
+              shootStopped();                         
+            } else {
+              shootGoal()            
+            }            
             break;
 
           // left

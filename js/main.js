@@ -51,6 +51,12 @@ $( document ).ready(function() {
       currentGame.ball = currentBall;
       const ballImg = new Image();
       ballImg.src = currentBall.img;
+
+      // create new goalie, store in currentGame, and draw goalie
+      let currentGoalie = new Goalie();
+      currentGame.goalie = currentGoalie;
+      let goalieImg = new Image();
+      goalieImg.src = currentGoalie.img;
       
 
       // create targets 1 to 9, store them in currentGame, and draw targets
@@ -87,7 +93,7 @@ $( document ).ready(function() {
         }
         ballImg.onload = () => {
           ctx.drawImage(ballImg, currentBall.x, currentBall.y, currentBall.width, currentBall.height);
-        }
+        }           
 
         currentTargets.forEach((target) => {
           let targetImg = new Image();
@@ -100,7 +106,10 @@ $( document ).ready(function() {
             ctx.drawImage(targetImg, target.x, target.y, target.width, target.height);             
           },15);
         });
-        
+
+        setTimeout (() => {            
+          ctx.drawImage(goalieImg, currentGoalie.x, currentGoalie.y, currentGoalie.width, currentGoalie.height);             
+        },15);        
       }
 
       // draw initial state of game
@@ -187,6 +196,11 @@ $( document ).ready(function() {
             target.drawTarget(ctx);
           },15);
         });
+        currentGoalie.x = 330;
+        currentGoalie.y = 200; 
+        setTimeout (() => {            
+          currentGoalie.drawGoalie(ctx);
+        },15);
       }
       
        // function to send goalie to a random target
@@ -214,6 +228,7 @@ $( document ).ready(function() {
           ctx.clearRect(0, 0, 800, 600);
           currentBackground.drawBackground(ctx);
           currentBall.drawBall(ctx);
+          currentGoalie.drawGoalie(ctx);       
 
           switch (selectedTarget){
             case 0:
@@ -271,17 +286,20 @@ $( document ).ready(function() {
           
           
           if(currentBall.y > currentTargets[selectedTarget].y){
-            requestAnimationFrame(() => shootStopped());           
+            if (currentBall.y > currentTargets[selectedTarget].y - 100){
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
+            }
+            requestAnimationFrame(() => shootStopped());              
           } else {           
-
             // use up one chance to shoot
             userChances--;
 
             // Notify that shoot was stopped and add red X to score
-            alert('Stopped!');
+            alert('Stopped!');            
             playerScore.append(`<li><img src="./img/red-x.png" height='30px' width='30px' alt="missed"></li>`);
 
-            cancelAnimationFrame(shootStopped);
+            cancelAnimationFrame(shootStopped);                          
 
             // check if game is over after Player shoots
             gameStatusUser();
@@ -328,6 +346,7 @@ $( document ).ready(function() {
           ctx.clearRect(0, 0, 800, 600);
           currentBackground.drawBackground(ctx);
           currentBall.drawBall(ctx);
+          currentGoalie.drawGoalie(ctx);
 
           switch (selectedTarget){
             case 0:
@@ -498,6 +517,9 @@ $( document ).ready(function() {
           currentBall.y = 500;
           currentBackground.drawBackground(ctx);
           currentBall.drawBall(ctx);
+          setTimeout (() => {            
+            currentGoalie.drawGoalie(ctx);
+          },20);
           currentTargets.forEach((target) => {            
             setTimeout (() => {            
               target.drawTarget(ctx);

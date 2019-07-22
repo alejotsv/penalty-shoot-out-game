@@ -68,10 +68,10 @@ class Ball {
 
   class Goalie {
     constructor() {
-      this.x = 380;
-      this.y = 400;
-      this.width = 180;
-      this.height = 180;
+      this.x = 330;
+      this.y = 200;
+      this.width = 179;
+      this.height = 205;
       this.img = './img/gk-idle.png';
     }
     drawGoalie(ctx) {

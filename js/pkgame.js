@@ -90,7 +90,7 @@ class Ball {
       const goalieImg = new Image();
       goalieImg.src = this.img;
       ctx.drawImage(goalieImg, this.x, this.y, this.width, this.height);    
-    }
+    }    
   }
 
 

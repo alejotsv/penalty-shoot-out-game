@@ -197,7 +197,8 @@ $( document ).ready(function() {
           },15);
         });
         currentGoalie.x = 330;
-        currentGoalie.y = 200; 
+        currentGoalie.y = 200;
+        currentGoalie.img = './img/gk-idle.png';
         setTimeout (() => {            
           currentGoalie.drawGoalie(ctx);
         },15);
@@ -255,6 +256,7 @@ $( document ).ready(function() {
               currentBall.height -= 0.9;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.img = './img/gk-save-middle-left.png';
               break;
             case 4:
               currentBall.y -= 11;

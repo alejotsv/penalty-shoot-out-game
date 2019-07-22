@@ -291,7 +291,7 @@ $( document ).ready(function() {
               currentBall.height -= 1;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
-              currentGoalie.img = './img/gk-save-center.png'
+              currentGoalie.img = './img/gk-save-down-left.png'
               break;
             case 7:
               currentBall.y -= 10;

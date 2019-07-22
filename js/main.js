@@ -253,6 +253,8 @@ $( document ).ready(function() {
               currentBall.y -= 11;
               currentBall.width -= 0.9;
               currentBall.height -= 0.9;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 4:
               currentBall.y -= 11;
@@ -287,8 +289,7 @@ $( document ).ready(function() {
           
           if(currentBall.y > currentTargets[selectedTarget].y){
             if (currentBall.y > currentTargets[selectedTarget].y - 100){
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              
             }
             requestAnimationFrame(() => shootStopped());              
           } else {           

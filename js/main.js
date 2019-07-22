@@ -237,17 +237,23 @@ $( document ).ready(function() {
               currentBall.y -= 10;
               currentBall.width -= 0.8;
               currentBall.height -= 0.8;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 1:
               currentBall.y -= 10;
               currentBall.width -= 0.8;
               currentBall.height -= 0.8;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 2:
               currentBall.x += 8;
               currentBall.y -= 10;
               currentBall.width -= 0.8;
               currentBall.height -= 0.8;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 3:
               currentBall.x -= 11;
@@ -262,29 +268,39 @@ $( document ).ready(function() {
               currentBall.y -= 11;
               currentBall.width -= 0.9;
               currentBall.height -= 0.9;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 5:
               currentBall.x += 11;
               currentBall.y -= 11;
               currentBall.width -= 0.9;
               currentBall.height -= 0.9;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 6:
               currentBall.x -= 14;
               currentBall.y -= 10;
               currentBall.width -= 1;
               currentBall.height -= 1;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 7:
               currentBall.y -= 10;
               currentBall.width -= 1;
               currentBall.height -= 1;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 8:
               currentBall.x += 14;
               currentBall.y -= 10;
               currentBall.width -= 1;
               currentBall.height -= 1;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
           }        
           
@@ -357,51 +373,69 @@ $( document ).ready(function() {
               currentBall.y -= 10;
               currentBall.width -= 1.2;
               currentBall.height -= 1.2;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 1:
               currentBall.y -= 10;
               currentBall.width -= 1.2;
               currentBall.height -= 1.2;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 2:
               currentBall.x += 8;
               currentBall.y -= 10;
               currentBall.width -= 1.2;
               currentBall.height -= 1.2;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 3:
               currentBall.x -= 11;
               currentBall.y -= 11;
               currentBall.width -= 1.5;
               currentBall.height -= 1.5;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 4:
               currentBall.y -= 11;
               currentBall.width -= 1.5;
               currentBall.height -= 1.5;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 5:
               currentBall.x += 11;
               currentBall.y -= 11;
               currentBall.width -= 1.5;
               currentBall.height -= 1.5;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 6:
               currentBall.x -= 14;
               currentBall.y -= 10;
               currentBall.width -= 1.6;
               currentBall.height -= 1.6;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 7:
               currentBall.y -= 10;
               currentBall.width -= 1.6;
               currentBall.height -= 1.6;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
             case 8:
               currentBall.x += 14;
               currentBall.y -= 10;
               currentBall.width -= 1.6;
               currentBall.height -= 1.6;
+              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.y = currentTargets[selectedTarget].y;
               break;
           }        
           

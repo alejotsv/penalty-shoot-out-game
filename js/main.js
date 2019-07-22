@@ -239,6 +239,7 @@ $( document ).ready(function() {
               currentBall.height -= 0.8;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.img = './img/gk-save-up-left.png'
               break;
             case 1:
               currentBall.y -= 10;
@@ -246,6 +247,7 @@ $( document ).ready(function() {
               currentBall.height -= 0.8;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.img = './img/gk-save-up-center.png'
               break;
             case 2:
               currentBall.x += 8;
@@ -254,6 +256,7 @@ $( document ).ready(function() {
               currentBall.height -= 0.8;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.img = './img/gk-save-up-right.png'
               break;
             case 3:
               currentBall.x -= 11;
@@ -270,6 +273,7 @@ $( document ).ready(function() {
               currentBall.height -= 0.9;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.img = './img/gk-save-center.png'
               break;
             case 5:
               currentBall.x += 11;
@@ -278,6 +282,7 @@ $( document ).ready(function() {
               currentBall.height -= 0.9;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.img = './img/gk-save-middle-right.png'
               break;
             case 6:
               currentBall.x -= 14;
@@ -286,6 +291,7 @@ $( document ).ready(function() {
               currentBall.height -= 1;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.img = './img/gk-save-center.png'
               break;
             case 7:
               currentBall.y -= 10;
@@ -293,6 +299,7 @@ $( document ).ready(function() {
               currentBall.height -= 1;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.img = './img/gk-save-down-center.png'
               break;
             case 8:
               currentBall.x += 14;
@@ -301,6 +308,7 @@ $( document ).ready(function() {
               currentBall.height -= 1;
               currentGoalie.x = currentTargets[selectedTarget].x;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.img = './img/gk-save-down-right.png'
               break;
           }        
           
@@ -372,70 +380,52 @@ $( document ).ready(function() {
               currentBall.x -= 8;
               currentBall.y -= 10;
               currentBall.width -= 1.2;
-              currentBall.height -= 1.2;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentBall.height -= 1.2;              
               break;
             case 1:
               currentBall.y -= 10;
               currentBall.width -= 1.2;
-              currentBall.height -= 1.2;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentBall.height -= 1.2;              
               break;
             case 2:
               currentBall.x += 8;
               currentBall.y -= 10;
               currentBall.width -= 1.2;
-              currentBall.height -= 1.2;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentBall.height -= 1.2;              
               break;
             case 3:
               currentBall.x -= 11;
               currentBall.y -= 11;
               currentBall.width -= 1.5;
-              currentBall.height -= 1.5;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentBall.height -= 1.5;              
               break;
             case 4:
               currentBall.y -= 11;
               currentBall.width -= 1.5;
-              currentBall.height -= 1.5;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentBall.height -= 1.5;             
               break;
             case 5:
               currentBall.x += 11;
               currentBall.y -= 11;
               currentBall.width -= 1.5;
-              currentBall.height -= 1.5;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentBall.height -= 1.5;              
               break;
             case 6:
               currentBall.x -= 14;
               currentBall.y -= 10;
               currentBall.width -= 1.6;
-              currentBall.height -= 1.6;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentBall.height -= 1.6;              
               break;
             case 7:
               currentBall.y -= 10;
               currentBall.width -= 1.6;
-              currentBall.height -= 1.6;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentBall.height -= 1.6;              
               break;
             case 8:
               currentBall.x += 14;
               currentBall.y -= 10;
               currentBall.width -= 1.6;
-              currentBall.height -= 1.6;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentBall.height -= 1.6;             
               break;
           }        
           

@@ -73,6 +73,18 @@ class Ball {
       this.width = 179;
       this.height = 205;
       this.img = './img/gk-idle.png';
+      this.imgGoalLeft = './img/gk-goal-left.png';
+      this.imgGoalRight = './img/gk-goal-right.png';
+      this.imgGoalCenter = './img/gk-goal-center.png';
+      this.imgSave0 = './img/gk-save-up-left.png';
+      this.imgSave1 = './img/gk-save-up-center.png';
+      this.imgSave2 = './img/gk-save-up-right.png';
+      this.imgSave3 = './img/gk-save-middle-left.png';
+      this.imgSave4 = './img/gk-save-center.png';
+      this.imgSave5 = './img/gk-save-middle-right.png';
+      this.imgSave6 = './img/gk-save-down-left.png';
+      this.imgSave7 = './img/gk-save-down-center.png';
+      this.imgSave8 = '../img/gk-save-down-right.png';
     }
     drawGoalie(ctx) {
       const goalieImg = new Image();

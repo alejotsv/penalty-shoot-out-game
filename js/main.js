@@ -281,17 +281,19 @@ $( document ).ready(function() {
               currentBall.y -= 11;
               currentBall.width -= 0.9;
               currentBall.height -= 0.9;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
-              currentGoalie.img = './img/gk-save-center.png'
+              // currentGoalie.x = currentTargets[selectedTarget].x;
+              // currentGoalie.y = currentTargets[selectedTarget].y;
+              // currentGoalie.img = './img/gk-save-center.png'
               break;
             case 5:
               currentBall.x += 11;
               currentBall.y -= 11;
               currentBall.width -= 0.9;
               currentBall.height -= 0.9;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.x = currentTargets[selectedTarget].x-200;
+              currentGoalie.y = currentTargets[selectedTarget].y-50;
+              currentGoalie.width = 245;
+              currentGoalie.height = 310;
               currentGoalie.img = './img/gk-save-middle-right.png'
               break;
             case 6:
@@ -300,15 +302,19 @@ $( document ).ready(function() {
               currentBall.width -= 1;
               currentBall.height -= 1;
               currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.y = currentTargets[selectedTarget].y-150;
+              currentGoalie.width = 295;
+              currentGoalie.height = 280;
               currentGoalie.img = './img/gk-save-down-left.png'
               break;
             case 7:
               currentBall.y -= 10;
               currentBall.width -= 1;
               currentBall.height -= 1;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.x = currentTargets[selectedTarget].x-20;
+              currentGoalie.y = currentTargets[selectedTarget].y-150;
+              currentGoalie.width = 255;
+              currentGoalie.height = 270;
               currentGoalie.img = './img/gk-save-down-center.png'
               break;
             case 8:
@@ -316,8 +322,10 @@ $( document ).ready(function() {
               currentBall.y -= 10;
               currentBall.width -= 1;
               currentBall.height -= 1;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.x = currentTargets[selectedTarget].x-290;
+              currentGoalie.y = currentTargets[selectedTarget].y-150;
+              currentGoalie.width = 365;
+              currentGoalie.height = 290;
               currentGoalie.img = './img/gk-save-down-right.png'
               break;
           }        
@@ -390,52 +398,97 @@ $( document ).ready(function() {
               currentBall.x -= 8;
               currentBall.y -= 10;
               currentBall.width -= 1.2;
-              currentBall.height -= 1.2;              
+              currentBall.height -= 1.2;
+              currentGoalie.x = 410;
+              currentGoalie.y = 150;
+              currentGoalie.width = 390;
+              currentGoalie.height = 275;
+              currentGoalie.img = './img/gk-goal-left.png'
               break;
             case 1:
               currentBall.y -= 10;
               currentBall.width -= 1.2;
-              currentBall.height -= 1.2;              
+              currentBall.height -= 1.2;
+              currentGoalie.x = 45;
+              currentGoalie.y = 200;
+              currentGoalie.width = 395;
+              currentGoalie.height = 220;
+              currentGoalie.img = './img/gk-goal-center.png'              
               break;
             case 2:
               currentBall.x += 8;
               currentBall.y -= 10;
               currentBall.width -= 1.2;
-              currentBall.height -= 1.2;              
+              currentBall.height -= 1.2;
+              currentGoalie.x = 65;
+              currentGoalie.y = 190;
+              currentGoalie.width = 395;
+              currentGoalie.height = 220;
+              currentGoalie.img = './img/gk-goal-right.png'            
               break;
             case 3:
               currentBall.x -= 11;
               currentBall.y -= 11;
               currentBall.width -= 1.5;
-              currentBall.height -= 1.5;              
+              currentBall.height -= 1.5;
+              currentGoalie.x = 410;
+              currentGoalie.y = 150;
+              currentGoalie.width = 390;
+              currentGoalie.height = 275;
+              currentGoalie.img = './img/gk-goal-left.png'
               break;
             case 4:
               currentBall.y -= 11;
               currentBall.width -= 1.5;
-              currentBall.height -= 1.5;             
+              currentBall.height -= 1.5;
+              currentGoalie.x = 45;
+              currentGoalie.y = 200;
+              currentGoalie.width = 395;
+              currentGoalie.height = 220;
+              currentGoalie.img = './img/gk-goal-center.png'            
               break;
             case 5:
               currentBall.x += 11;
               currentBall.y -= 11;
               currentBall.width -= 1.5;
-              currentBall.height -= 1.5;              
+              currentBall.height -= 1.5;
+              currentGoalie.x = 65;
+              currentGoalie.y = 190;
+              currentGoalie.width = 395;
+              currentGoalie.height = 220;
+              currentGoalie.img = './img/gk-goal-right.png'             
               break;
             case 6:
               currentBall.x -= 14;
               currentBall.y -= 10;
               currentBall.width -= 1.6;
-              currentBall.height -= 1.6;              
+              currentBall.height -= 1.6;
+              currentGoalie.x = 410;
+              currentGoalie.y = 150;
+              currentGoalie.width = 390;
+              currentGoalie.height = 275;
+              currentGoalie.img = './img/gk-goal-left.png'           
               break;
             case 7:
               currentBall.y -= 10;
               currentBall.width -= 1.6;
-              currentBall.height -= 1.6;              
+              currentBall.height -= 1.6;
+              currentGoalie.x = 385;
+              currentGoalie.y = 200;
+              currentGoalie.width = 395;
+              currentGoalie.height = 220;
+              currentGoalie.img = './img/gk-goal-down-center.png'            
               break;
             case 8:
               currentBall.x += 14;
               currentBall.y -= 10;
               currentBall.width -= 1.6;
-              currentBall.height -= 1.6;             
+              currentBall.height -= 1.6;
+              currentGoalie.x = 65;
+              currentGoalie.y = 190;
+              currentGoalie.width = 395;
+              currentGoalie.height = 220;
+              currentGoalie.img = './img/gk-goal-right.png'            
               break;
           }        
           
@@ -509,7 +562,7 @@ $( document ).ready(function() {
           // spacebar (shoot stopped or shoot goal)
           case 32:
 
-            let goaliePosition = 3//goalieTarget();
+            let goaliePosition = goalieTarget();
             if (goaliePosition === selectedTarget){          
               shootStopped();                         
             } else {

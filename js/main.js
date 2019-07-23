@@ -198,6 +198,8 @@ $( document ).ready(function() {
         });
         currentGoalie.x = 330;
         currentGoalie.y = 200;
+        currentGoalie.height = 205; 
+        currentGoalie.width = 179;
         currentGoalie.img = './img/gk-idle.png';
         setTimeout (() => {            
           currentGoalie.drawGoalie(ctx);
@@ -228,8 +230,8 @@ $( document ).ready(function() {
           // Clear canvas, draw background and ball, and update ball Y, width, and height
           ctx.clearRect(0, 0, 800, 600);
           currentBackground.drawBackground(ctx);
-          currentBall.drawBall(ctx);
-          currentGoalie.drawGoalie(ctx);       
+          currentGoalie.drawGoalie(ctx);
+          currentBall.drawBall(ctx);                 
 
           switch (selectedTarget){
             case 0:
@@ -237,16 +239,20 @@ $( document ).ready(function() {
               currentBall.y -= 10;
               currentBall.width -= 0.8;
               currentBall.height -= 0.8;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.x = currentTargets[selectedTarget].x-150;
+              currentGoalie.y = currentTargets[selectedTarget].y+20;               
+              currentGoalie.width = 400;
+              currentGoalie.height = 250;
               currentGoalie.img = './img/gk-save-up-left.png'
               break;
             case 1:
               currentBall.y -= 10;
               currentBall.width -= 0.8;
               currentBall.height -= 0.8;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.x = currentTargets[selectedTarget].x-100;
+              currentGoalie.y = currentTargets[selectedTarget].y+50;
+              currentGoalie.width = 245;
+              currentGoalie.height = 250;
               currentGoalie.img = './img/gk-save-up-center.png'
               break;
             case 2:
@@ -254,8 +260,10 @@ $( document ).ready(function() {
               currentBall.y -= 10;
               currentBall.width -= 0.8;
               currentBall.height -= 0.8;
-              currentGoalie.x = currentTargets[selectedTarget].x;
+              currentGoalie.x = currentTargets[selectedTarget].x-150;
               currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.width = 255;
+              currentGoalie.height = 300;
               currentGoalie.img = './img/gk-save-up-right.png'
               break;
             case 3:
@@ -263,8 +271,10 @@ $( document ).ready(function() {
               currentBall.y -= 11;
               currentBall.width -= 0.9;
               currentBall.height -= 0.9;
-              currentGoalie.x = currentTargets[selectedTarget].x;
-              currentGoalie.y = currentTargets[selectedTarget].y;
+              currentGoalie.x = currentTargets[selectedTarget].x-30;
+              currentGoalie.y = currentTargets[selectedTarget].y-50;
+              currentGoalie.width = 295;
+              currentGoalie.height = 320;
               currentGoalie.img = './img/gk-save-middle-left.png';
               break;
             case 4:
@@ -499,7 +509,7 @@ $( document ).ready(function() {
           // spacebar (shoot stopped or shoot goal)
           case 32:
 
-            let goaliePosition = goalieTarget();
+            let goaliePosition = 3//goalieTarget();
             if (goaliePosition === selectedTarget){          
               shootStopped();                         
             } else {

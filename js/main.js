@@ -563,7 +563,7 @@ $( document ).ready(function() {
           case 32:
 
             let goaliePosition = goalieTarget();
-            if (goaliePosition === selectedTarget){          
+            if (goaliePosition > 6){ //=== selectedTarget          
               shootStopped();                         
             } else {
               shootGoal()            

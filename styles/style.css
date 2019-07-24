@@ -1,3 +1,8 @@
+body {
+  background-image: url("../img/html-background.jpg");
+  color: darkslategray;
+}
+
 #start-game { 
   margin: 10px 0 30px 0;
   background-color: #4CAF50;
@@ -32,3 +37,9 @@
   display: inline;
   padding: 10px;
 }
+
+#instructions li, #rules li {
+  display: list-item;
+  padding-top: 0;
+}
+
